@@ -214,20 +214,32 @@
 			
 			
 			private function AllowHandler(evt:AppEvent):void{
-				if(op_amf.getResult() as Boolean  == true){
-					Alert.show('操作成功');
-					var temp:Object = this.cd.selectedItem;
-					temp.statename = '已批准';
-					temp._enabled = false;
-					temp.opname = AppConfig.admin.flagname;
-					this.cd.invalidateList();
-				}else{
-					Alert.show('操作失败');
+				var stat:Number = op_amf.getResult() as Number;
+				switch(stat){
+					case 1 : Alert.show('操作成功');
+								var temp:Object = this.cd.selectedItem;
+								temp.statename = '已批准';
+								temp._enabled = false;
+								temp.opname = AppConfig.admin.flagname;
+								this.cd.invalidateList();
+								break;
+					case -3 : Alert.show('操作失败:充值金额小于或等于0');
+								  break;
+					case -1: Alert.show('操作失败:验证失败');
+						         break;
+					case -5: Alert.show('操作失败:服务器ID或运营商ID错误');
+								break;
+					case -2: Alert.show('操作失败:玩家账号不存在');
+								break;
+					case -10: Alert.show('操作失败:未知错误');
+								break;
+					default: Alert.show('操作失败,代码'+stat);
 				}
+				
 			}
 			
 			private function RefuseHandler(evt:AppEvent):void{
-				if(op_amf.getResult() as Boolean  == true){
+				if(op_amf.getResult() as Number  == 1){
 					Alert.show('操作成功');
 					var temp:Object = this.cd.selectedItem;
 					temp.statename = '已拒绝';

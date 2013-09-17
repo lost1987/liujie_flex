@@ -5,17 +5,17 @@ package com.ylsoft.core
 	public class AppConfig
 	{
 		
-//		public static const HOST:String = 'http://1.6jzm.app100728925.twsapp.com';
-//    	public static const AMFURL : String = HOST+'/game_manager/gateway.php';
-//		public static const EXCEL_GATEWAY : String = HOST+'/game_manager/excel_gateway.php';
-//		public static const INFO_URL : String = HOST+'/game_manager/flexhtml/phpinfo.php';
-//		public static const INFO_PWD:String = 'bdijltvwxzBCDEFGIJLMOQTVWXZ12357';
-		
-		public static const HOST:String = 'http://192.168.20.228';
-		public static const AMFURL : String = HOST+'/liujie/gateway.php';
-		public static const EXCEL_GATEWAY : String = HOST+'/liujie/excel_gateway.php';
-		public static const INFO_URL : String = HOST+'/liujie/flexhtml/phpinfo.php';
+		public static const HOST:String = 'http://1.6jzm.app100728925.twsapp.com';
+    	public static const AMFURL : String = HOST+'/game_manager/gateway.php';
+		public static const EXCEL_GATEWAY : String = HOST+'/game_manager/excel_gateway.php';
+		public static const INFO_URL : String = HOST+'/game_manager/flexhtml/phpinfo.php';
 		public static const INFO_PWD:String = 'bdijltvwxzBCDEFGIJLMOQTVWXZ12357';
+		
+//		public static const HOST:String = 'http://192.168.20.228';
+//		public static const AMFURL : String = HOST+'/liujie/gateway.php';
+//		public static const EXCEL_GATEWAY : String = HOST+'/liujie/excel_gateway.php';
+//		public static const INFO_URL : String = HOST+'/liujie/flexhtml/phpinfo.php';
+//		public static const INFO_PWD:String = 'bdijltvwxzBCDEFGIJLMOQTVWXZ12357';
 		
 		public static const MATERIAL:String = 'com/ylsoft/assets/images/';
 		public static const MODULEPATH:String = 'com/ylsoft/module/';

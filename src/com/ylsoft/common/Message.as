@@ -16,13 +16,13 @@ package com.ylsoft.common
 		 * 
 		 * callBack 点击 确认的时候 需要调用的函数
 		 **/
-		public static function confirm(msg:String,parent:Sprite,callBack:Function):void{
+		public static function confirm(msg:String,parent:Sprite,callBack:Function,params:Array=null):void{
 			Alert.yesLabel = '确定';
 			Alert.noLabel = '取消';
 			
 			Alert.show(msg,"请确认",1|2,parent,function(evt:CloseEvent):void{
 							if(evt.detail == Alert.YES){
-								callBack();
+								callBack.apply(null,params);
 							}
 				});
 		}

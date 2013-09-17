@@ -57,9 +57,9 @@
 				
 				if(result != null){
 					for each(var obj:Object in result){
-						_total_recharge+=obj.recharge_yuanbao;
-						_total_unrecharge += obj.unrecharge_yuanbao;
-						_total_usedrecharge += obj.used_yuanbao;
+						_total_recharge+=Number(obj.recharge_yuanbao);
+						_total_unrecharge += Number(obj.unrecharge_yuanbao);
+						_total_usedrecharge += Number(obj.used_yuanbao);
 					}
 					this.total_recharge.text = _total_recharge.toString();
 					this.total_unrecharge.text = _total_unrecharge.toString();

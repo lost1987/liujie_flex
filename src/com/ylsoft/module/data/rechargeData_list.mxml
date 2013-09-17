@@ -19,6 +19,7 @@
 	<fx:Script>
 		<![CDATA[
 			import com.ylsoft.chart.ChartDrag;
+			import com.ylsoft.chart.ChartZoom;
 			import com.ylsoft.common.ComponentExportImage;
 			import com.ylsoft.common.Message;
 			import com.ylsoft.common.Pagelimit;
@@ -50,7 +51,7 @@
 			private var _total:Object = new Object;
 			private var _dateformat:DateFormatter = new DateFormatter();
 			private var _totalData:ArrayCollection;
-			private var chartControl : ChartDrag = new ChartDrag();
+			private var chartZoom : ChartZoom = new ChartZoom();
 			
 			private function init():void{
 				//禁用返回列表
@@ -97,7 +98,8 @@
 			
 			private function initChart(evt:AppEvent):void{
 				this._totalData = new ArrayCollection(amf.getResult() as Array);
-				chartControl.init(_totalData,this.linechart,6);
+				this.linechart.dataProvider = _totalData;
+				chartZoom.init(this.linechart);
 				
 				this.rechargeperson.visible = true;
 				this.newrechargeperson.visible = true;
@@ -182,7 +184,7 @@
 			
 			public function exportComponentImage(evt:AppEvent):void{
 				ComponentExportImage.getInstance().ui_target = this.main_panel;
-				ComponentExportImage.getInstance().save_name = "注册创建";
+				ComponentExportImage.getInstance().save_name = "玩家充值";
 				FlexGlobals.topLevelApplication.btn_component_image_export.enabled = true;
 			}
 			

@@ -195,44 +195,6 @@
 				amf.startService('playerService','lists',new Pagelimit(0,AppConfig.PAGECOUNT),getCondition());
 			}
 			
-			private function kick():void{
-				if(this.cd.selecteditems.length == 0){
-					Alert.show("请在要踢出的玩家前面打勾");return;
-				}
-				var sl : SocketListener = new SocketListener(this.cd.selecteditems);
-				var nc : NetCore31 = new NetCore31(sl);
-				nc.isTGW=true;
-				nc.connect(this.server.server_ip,this.server.server_port);
-			}
-			
-			private function kill():void{
-				if(this.cd.selecteditems.length == 0){
-					Alert.show("请在要封号的玩家前面打勾");return;
-				}
-				
-				Message.confirm("确认要封禁此账号吗?操作将不可恢复!!!亲~",this,this.killConfirm);
-
-			}
-			
-			private function killConfirm():void{
-				//发送请求修改玩家状态
-				amf = new Amf();
-				amf.setFaultMessage('通信失败');
-				amf.registerCallBack(killhandler);
-				amf.startService('playerService','kill',this.cd.selecteditems.source,this.server);
-			}
-			
-			private function killhandler(evt:AppEvent):void{
-				var result:Boolean = amf.getResult() as Boolean;
-				amf = null;
-				if(result){
-					var sl : SocketListener = new SocketListener(this.cd.selecteditems);
-					var nc : NetCore31 = new NetCore31(sl);
-					nc.connect(this.server.server_ip,this.server.server_port);
-					return;
-				}
-				Alert.show('封号失败');
-			}
 			
 			private function showdetail(evt:ListEvent):void{
 				var selectItem : Object = this.cd.dg.selectedItem;
@@ -257,6 +219,37 @@
 				}
 			}
 			
+			private function GMOperation(code : int):void{
+				if(this.cd.selecteditems.length == 0){
+					Alert.show("请在要封号的玩家前面打勾");return;
+				}
+				var op:String = "";
+				switch(code){
+					case 0: op = "恢复";break;
+					case 1: op = "删号";break;
+					case 2: op = "封号";break;
+					case 3: op = "禁言";break;
+					case 4: op = "踢出";break;
+				}
+				
+				Message.confirm("请确认操作:"+op,this,this.opConfirm,new Array([code]));
+			}
+			
+			private function opConfirm(params:Array):void{
+				//发送请求修改玩家状态
+				amf = new Amf();
+				amf.setFaultMessage('通信失败');
+				amf.registerCallBack(opHandler);
+				amf.startService('playerService','GMOperation',this.cd.selecteditems.source,this.server,params[0]);
+			}
+			
+			private function opHandler(evt:AppEvent):void{
+				var stat:Number = Number(amf.getResult());
+				if(stat == -1)Alert.show('操作失败');
+				else Alert.show('操作成功');
+				amf = null;
+			}
+			
 		]]>
 	</fx:Script>
 	<s:Panel width="100%" height="100%" dropShadowVisible="true" title="在线玩家">
@@ -266,11 +259,16 @@
 		</component:CB_Datagrid>
 		<component:Subpages id="sb" x="0" bottom="0">
 		</component:Subpages>
-		<s:HGroup right="2" top="2" width="357">
+		<s:HGroup right="233" top="0" width="209">
 			<s:Button id="search_btn"  label="查询" click="doSearch()" enabled="false" buttonMode="true"/>
 			<s:Button  label="选择运营商和服务器" click="buissnesserChooser()" buttonMode="true"/>
-			<s:Button label="踢出" buttonMode="true" id="kickbtn"  click="kick()" enabled="true"/>
-			<s:Button id="killbtn" label="封号" click="kill()" buttonMode="true"/>
+		</s:HGroup>
+		<s:HGroup right="4" top="0" width="227" gap="0">
+			<s:Button  label="恢复" click="GMOperation(0)" buttonMode="true" width="45"/>
+			<s:Button  label="踢出" click="GMOperation(4)" buttonMode="true" width="45"/>
+			<s:Button  label="禁言" click="GMOperation(3)" buttonMode="true" width="45"/>
+			<s:Button  label="封号" click="GMOperation(2)" buttonMode="true" width="45"/>
+			<s:Button  label="删号" click="GMOperation(1)" buttonMode="true" width="45"/>
 		</s:HGroup>
 		<s:HGroup y="34" right="0" width="302">
 			<s:Label  fontWeight="bold" text="已选择服务器"/><s:Label textAlign="center" id="lb_servername" color="#FF0000" text=""/>

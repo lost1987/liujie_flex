@@ -75,7 +75,8 @@
    		<NODE name="客服邮件发送" module="sys/mail_service_add" permission="8"  visiable="true"></NODE>
    </FOLDER>
    <FOLDER name="运营功能" type="folder" permission="256" id="yygl">
-   		<NODE name="奖励申请" module="managefunc/reward_apply_list" permission="1"  visiable="false"></NODE>
+   	<!-- 	<NODE name="奖励申请" module="managefunc/reward_apply_list" permission="1"  visiable="true"></NODE> 最原始的方式-->
+   	    <NODE name="奖励申请" module="managefunc/reward_include_pay_html" permission="1"  visiable="true"></NODE>
    		<NODE name="申请开服" module="" permission="2"  visiable="false"></NODE>
    		<NODE name="申请合服" module="" permission="4"  visiable="false"></NODE>
    		<NODE name="申请管理员账号" module="managefunc/admin_apply_list" permission="8"  visiable="false"></NODE>

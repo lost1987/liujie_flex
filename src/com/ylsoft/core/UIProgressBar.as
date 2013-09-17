@@ -31,7 +31,7 @@ package com.ylsoft.core
 				this.verticalCenter = 0;
 				this.mode = ProgressBarMode.MANUAL;
 				this.labelPlacement = ProgressBarLabelPlacement.CENTER;
-				this.indeterminate = true;
+				//this.indeterminate = true;
 				this.label = "正在加载";
 				this.setStyle("barColor",0x3366FF);
 				this.setStyle("textAlign",TextFormatAlign.CENTER);
