@@ -78,6 +78,15 @@
 					{label:"银币:高->低",value:3}
 				]);
 				this.order.selectedIndex = 0;
+				
+				//初始化操作状态
+				this.opstate.labelField = 'label';
+				this.opstate.dataProvider = new ArrayCollection([
+					{label:"无",value:0},
+					{label:"禁言",value:3},
+					{label:"封号",value:2}
+				]);
+				this.opstate.selectedIndex = 0;
 			}
 			
 			public function initDataGrid(evt:AppEvent):void{
@@ -182,6 +191,7 @@
 				var condition : Object = new Object();
 				condition.account_or_name = this.lb_account_or_name.text;
 				condition.onlinestatus = this.onlinestatus.selectedItem.type;
+				condition.opstate = this.opstate.selectedItem.value;
 				condition.server = server;
 				condition.order = order.selectedItem.value;
 				return condition;
@@ -268,17 +278,19 @@
 			<s:Button  label="踢出" click="GMOperation(4)" buttonMode="true" width="45"/>
 			<s:Button  label="禁言" click="GMOperation(3)" buttonMode="true" width="45"/>
 			<s:Button  label="封号" click="GMOperation(2)" buttonMode="true" width="45"/>
-			<s:Button  label="删号" click="GMOperation(1)" buttonMode="true" width="45"/>
+			<s:Button  label="删号" click="GMOperation(1)" buttonMode="true" width="45" enabled="false"/>
 		</s:HGroup>
 		<s:HGroup y="34" right="0" width="302">
 			<s:Label  fontWeight="bold" text="已选择服务器"/><s:Label textAlign="center" id="lb_servername" color="#FF0000" text=""/>
 		</s:HGroup>
-		<s:Label left="10" top="15"  text="角色名或账号"/>
-		<s:TextInput left="95" top="10" id="lb_account_or_name"/>
-		<s:Label left="231" top="15"  text="状态"/>
-		<mx:ComboBox id="onlinestatus" left="260" top="10" width="80" height="25" openDuration="300"/>
-		<s:Label left="370" top="15"  text="排序"/>
-		<mx:ComboBox id="order" left="400" top="10" width="150" height="25" openDuration="300"/>
+		<s:Label left="10" top="8"  text="角色名或账号"/>
+		<s:TextInput left="95" top="2" id="lb_account_or_name"/>
+		<s:Label left="231" top="7"  text="状态"/>
+		<mx:ComboBox id="onlinestatus" left="260" top="1" width="80" height="25" openDuration="300"/>
+		<s:Label left="370" top="8"  text="排序"/>
+		<mx:ComboBox id="order" left="400" top="1" width="156" height="25" openDuration="300"/>
+		<s:Label x="11" y="36" text="操作状态"/>
+		<mx:ComboBox id="opstate" x="95" y="29" width="129" height="24"/>
 	</s:Panel>	
 	
 </s:Module>
